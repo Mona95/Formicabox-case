@@ -1,9 +1,9 @@
 import React from "react";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import Dashboard from "./components/Welcome/Welcome";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Welcome from "./components/Welcome/Welcome";
 
 const AppContainer = styled.div`
   border: 1px solid green;
@@ -27,7 +27,7 @@ const App: React.FC = () => {
             <Register />
           </Route>
           <Route path="/welcome">
-            <Dashboard />
+            <Welcome />
           </Route>
         </Switch>
       </Router>
