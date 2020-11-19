@@ -1,7 +1,7 @@
 import React from "react";
 
-function App() {
+const App: React.FC = () => {
   return <div>Formicabox</div>;
-}
+};
 
 export default App;
