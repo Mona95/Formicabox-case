@@ -1,6 +1,9 @@
 import React from "react";
 import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Dashboard from "./components/Dashboard/Dashboard";
 import styled from "styled-components";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const AppContainer = styled.div`
   border: 1px solid green;
@@ -15,7 +18,19 @@ const AppContainer = styled.div`
 const App: React.FC = () => {
   return (
     <AppContainer>
-      <Login />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+        </Switch>
+      </Router>
     </AppContainer>
   );
 };

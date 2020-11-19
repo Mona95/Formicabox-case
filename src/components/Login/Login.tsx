@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 type Props = {};
 type State = {};
@@ -30,11 +31,13 @@ class Login extends Component<Props, State> {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Log in
-          </Button>
+          <Link to="/dashboard">
+            <Button type="primary" htmlType="submit">
+              Log in
+            </Button>
+          </Link>
           <br />
-          <a href="">register now!</a>
+          <Link to={"/register"}>register now!</Link>
         </Form.Item>
       </Form>
     );
