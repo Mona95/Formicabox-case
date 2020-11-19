@@ -31,7 +31,7 @@ class Login extends Component<Props, State> {
           />
         </Form.Item>
         <Form.Item>
-          <Link to="/dashboard">
+          <Link to="/welcome">
             <Button type="primary" htmlType="submit">
               Log in
             </Button>

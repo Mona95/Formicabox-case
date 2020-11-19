@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Dashboard from "./components/Welcome/Welcome";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/dashboard">
+          <Route path="/welcome">
             <Dashboard />
           </Route>
         </Switch>
