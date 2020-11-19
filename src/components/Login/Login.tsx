@@ -13,7 +13,7 @@ class Login extends Component<Props, State> {
 
   render() {
     return (
-      <Form name="normal_login" onFinish={this.onFinish}>
+      <Form name="login-form" onFinish={this.onFinish}>
         <Form.Item
           name="username"
           rules={[{ required: true, message: "Please enter your Username!" }]}
