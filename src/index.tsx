@@ -4,12 +4,14 @@ import { Provider } from "react-redux";
 import "./index.css";
 import store from "./store/store";
 import App from "./App";
+import { GlobalStyle } from "./globalStyle";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+    <GlobalStyle />
+  </>,
   document.getElementById("root")
 );
