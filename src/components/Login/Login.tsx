@@ -7,13 +7,13 @@ type Props = {};
 type State = {};
 
 class Login extends Component<Props, State> {
-  onFinish = (values: object) => {
-    console.log("Received values of form: ", values);
+  onLogin = (value: object) => {
+    console.log(value);
   };
 
   render() {
     return (
-      <Form name="login-form" onFinish={this.onFinish}>
+      <Form name="login-form" onFinish={this.onLogin}>
         <Form.Item
           name="username"
           rules={[{ required: true, message: "Please enter your Username!" }]}
@@ -31,14 +31,12 @@ class Login extends Component<Props, State> {
           />
         </Form.Item>
         <Form.Item>
-          <Link to="/welcome">
-            <Button type="primary" htmlType="submit">
-              Log in
-            </Button>
-          </Link>
-          <br />
-          <Link to={"/register"}>register now!</Link>
+          <Button type="primary" htmlType="submit">
+            Log in
+          </Button>
         </Form.Item>
+        <br />
+        <Link to={"/register"}>register now!</Link>
       </Form>
     );
   }

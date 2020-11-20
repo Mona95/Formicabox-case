@@ -1,27 +1,34 @@
-import React, { Component } from "react";
+import React, { Component, FC } from "react";
 import StudentRegister from "./StudentRegister";
 import TeacherRegister from "./TeacherRegister";
-
 import { Form, Button, Radio } from "antd";
-import { Link } from "react-router-dom";
 
-type Props = {};
+import { connect } from "react-redux";
+import { addStudent, addTeacher } from "../../actions/actions";
+
+type Props = {
+  addStudent: FC;
+  addTeacher: FC;
+  students: any;
+  teachers: any;
+};
 type State = {
-  studentRegister: boolean;
-  teacherRegister: boolean;
   radioValue: string;
 };
 
 class Register extends Component<Props, State> {
   state = {
-    studentRegister: true,
-    teacherRegister: false,
     radioValue: "student",
   };
 
-  onFinish = (values: object) => {
-    console.log(values);
+  onRegister = (values: object) => {
+    if (this.state.radioValue === "student") {
+      this.props.addStudent(values);
+    } else {
+      this.props.addTeacher(values);
+    }
   };
+
   onChange = (e: any) => {
     console.log("radio checked", e.target.value);
     this.setState({ radioValue: e.target.value });
@@ -29,7 +36,7 @@ class Register extends Component<Props, State> {
 
   render() {
     return (
-      <Form name="register-form" onFinish={this.onFinish}>
+      <Form name="register-form" onFinish={this.onRegister}>
         <Radio.Group onChange={this.onChange} value={this.state.radioValue}>
           <Radio value={"student"}>Student</Radio>
           <Radio value={"teacher"}>Teacher</Radio>
@@ -40,15 +47,28 @@ class Register extends Component<Props, State> {
           <TeacherRegister />
         )}
         <Form.Item>
-          <Link to="/">
-            <Button type="primary" htmlType="submit">
-              Register
-            </Button>
-          </Link>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
         </Form.Item>
       </Form>
     );
   }
 }
 
-export default Register;
+type reduxState = {
+  students: any;
+  teachers: any;
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+  addStudent: (student: any) => dispatch(addStudent(student)),
+  addTeacher: (teacher: any) => dispatch(addTeacher(teacher)),
+});
+
+const mapStateToProps = (state: reduxState) => ({
+  students: state.students,
+  teachers: state.teachers,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
