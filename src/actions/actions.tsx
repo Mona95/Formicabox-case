@@ -24,3 +24,8 @@ export const addTeacher = (teacher: Teacher) => ({
   type: actionTypes.ADD_TEACHER,
   payload: teacher,
 });
+
+export const removeStudent = (studentName: string) => ({
+  type: actionTypes.REMOVE_STUDENT,
+  payload: studentName,
+});

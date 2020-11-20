@@ -23,12 +23,14 @@ interface Teachers {
 interface State {
   students: Students[];
   teachers: Teachers[];
+  currUser: object;
 }
 
-const initialState: State = { students: [], teachers: [] };
+const initialState: State = { students: [], teachers: [], currUser: {} };
 
 const rootReducer = (state = initialState, action: Action): State => {
-  const { ADD_STUDENT, ADD_TEACHER } = actionTypes;
+  const { ADD_STUDENT, ADD_TEACHER, REMOVE_STUDENT } = actionTypes;
+  let students, teachers;
   switch (action.type) {
     case ADD_STUDENT:
       return {
@@ -39,6 +41,14 @@ const rootReducer = (state = initialState, action: Action): State => {
       return {
         ...state,
         teachers: [...state.teachers, action.payload],
+      };
+    case REMOVE_STUDENT:
+      students = state.students.filter((std) => {
+        return std.username !== action.payload;
+      });
+      return {
+        ...state,
+        students,
       };
     default:
       return state;
