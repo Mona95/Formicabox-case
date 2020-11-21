@@ -9,10 +9,11 @@ const AppContainer = styled.div`
   border: 1px solid green;
   border-radius: 8px;
   margin: auto;
-  position: relative;
+  position: absolute;
   text-align: center;
-  top: 0%;
-  width: 20%;
+  top: 30%;
+  left: 30%;
+  width: 40%;
 `;
 
 const App: React.FC = () => {

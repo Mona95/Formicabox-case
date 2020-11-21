@@ -3,7 +3,7 @@ import * as actionTypes from "./actionTypes";
 type Student = {
   username: string;
   password: string;
-  class: string;
+  studentclass: string;
   email: string;
   ects: number;
 };

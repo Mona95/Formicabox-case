@@ -17,7 +17,7 @@ const StudentRegister: React.FC = () => {
         <Input type="password" placeholder="Password" />
       </Form.Item>
       <Form.Item
-        name="class"
+        name="studentclass"
         rules={[{ required: true, message: "Please enter your Class!" }]}
       >
         <Input placeholder="Class" />
