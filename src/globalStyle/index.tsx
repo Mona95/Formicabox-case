@@ -2,6 +2,6 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
  html, body {
-    height: 100%;
+    background-color:#4597bf
   }
 `;

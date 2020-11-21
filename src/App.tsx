@@ -6,14 +6,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./components/Welcome/Welcome";
 
 const AppContainer = styled.div`
-  border: 1px solid green;
+  border: 1px solid darkblue;
   border-radius: 8px;
-  margin: auto;
-  position: absolute;
+  margin: 300px auto;
+  padding: 25px;
   text-align: center;
-  top: 30%;
-  left: 30%;
   width: 40%;
+  background-color: #e2e2e2;
 `;
 
 const App: React.FC = () => {

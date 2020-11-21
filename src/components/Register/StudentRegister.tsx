@@ -32,7 +32,7 @@ const StudentRegister: React.FC = () => {
         name="ects"
         rules={[{ required: true, message: "Please enter your ECTS!" }]}
       >
-        <Input type="number" placeholder="ECTS" />
+        <Input defaultValue="0" type="number" placeholder="ECTS" />
       </Form.Item>
     </div>
   );
