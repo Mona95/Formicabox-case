@@ -5,11 +5,11 @@ import StudentWelcome from "./StudentWelcome";
 import TeacherWelcome from "./TeacherWelcome";
 import { removeStudent } from "../../actions/actions";
 
-type Props = {
+interface Props {
   removeStudent: FC;
   students: any;
   loginuser: any;
-};
+}
 type State = {};
 
 class Welcome extends Component<Props, State> {

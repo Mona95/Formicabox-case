@@ -34,8 +34,9 @@ const rootReducer = (state = initialState, action: Action): State => {
     ADD_TEACHER,
     REMOVE_STUDENT,
     SET_LOGIN_USER,
+    UPDATE_STUDENT,
   } = actionTypes;
-  let students, teachers;
+  let students;
   switch (action.type) {
     case ADD_STUDENT:
       return {
@@ -59,6 +60,21 @@ const rootReducer = (state = initialState, action: Action): State => {
       return {
         ...state,
         loginuser: action.payload,
+      };
+    case UPDATE_STUDENT:
+      students = state.students.map((std) => {
+        if (std.username === action.payload.studentname) {
+          return {
+            ...std,
+            studentclass: action.payload.studentclass,
+            ects: action.payload.ects,
+          };
+        }
+        return std;
+      });
+      return {
+        ...state,
+        students,
       };
     default:
       return state;

@@ -34,3 +34,16 @@ export const removeStudent = (studentName: string) => ({
   type: actionTypes.REMOVE_STUDENT,
   payload: studentName,
 });
+
+export const updateStudent = (
+  studentname: string,
+  studentclass: string,
+  ects: number
+) => ({
+  type: actionTypes.UPDATE_STUDENT,
+  payload: {
+    studentname,
+    ects,
+    studentclass,
+  },
+});

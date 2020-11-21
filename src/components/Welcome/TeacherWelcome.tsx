@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Component } from "react";
 import { Table } from "antd";
 
 type Props = {
@@ -7,12 +7,40 @@ type Props = {
   students: any;
 };
 
-const StudentWelcome: React.FC<Props> = (props: Props) => {
-  const handleDeleteStudent = (value: any) => {
-    props.removeStudent(value);
+type State = {
+  editFormVisible: boolean;
+  selectedStudent: object;
+  studentclass: string;
+  ects: number;
+};
+
+class TeacherWelcome extends Component<Props, State> {
+  state = {
+    editFormVisible: false,
+    selectedStudent: {},
+    studentclass: "",
+    ects: 0,
   };
 
-  const columns = [
+  handleDeleteStudent = (value: any) => {
+    this.props.removeStudent(value);
+  };
+
+  showEditForm = (value: string) => {
+    this.setState({
+      editFormVisible: true,
+    });
+    let selectedStudent = this.props.students.find(
+      (std: any) => std.username === value
+    );
+    this.setState({
+      selectedStudent: selectedStudent,
+      studentclass: selectedStudent.studentclass,
+      ects: selectedStudent.ects,
+    });
+  };
+
+  columns = [
     {
       title: "Name",
       dataIndex: "username",
@@ -24,12 +52,6 @@ const StudentWelcome: React.FC<Props> = (props: Props) => {
       dataIndex: "studentclass",
       key: "studentclass",
       sorter: (a: any, b: any) => a.studentclass.length - b.studentclass.length,
-      render: (value: string) => (
-        <>
-          <span>{value}</span>
-          <button> Edit</button>
-        </>
-      ),
     },
     {
       title: "Email",
@@ -42,31 +64,65 @@ const StudentWelcome: React.FC<Props> = (props: Props) => {
       dataIndex: "ects",
       key: "ects",
       sorter: (a: any, b: any) => a.ects - b.ects,
-      render: (value: string) => (
-        <>
-          <span>{value}</span>
-          <button> Edit</button>
-        </>
-      ),
     },
     {
       title: "Action",
       dataIndex: "username",
       key: "x",
       render: (value: string) => (
-        <button onClick={() => handleDeleteStudent(value)}>Delete</button>
+        <>
+          <button onClick={() => this.handleDeleteStudent(value)}>
+            Delete
+          </button>
+          <button onClick={() => this.showEditForm(value)}> Edit</button>
+        </>
       ),
     },
   ];
 
-  return (
-    <>
-      <div>Teacher Information {props.loginuser.username}</div>
-      <Table columns={columns} dataSource={props.students} />
-      <br />
-      <br />
-    </>
-  );
-};
+  handleClassChange = (e: any) => {
+    this.setState({ studentclass: e.target.value });
+  };
 
-export default StudentWelcome;
+  handleEctsChange = (e: any) => {
+    this.setState({ ects: e.target.value });
+  };
+
+  handleEditStudent = (value: any) => {
+    let { studentclass, ects, selectedStudent } = this.state;
+    debugger;
+  };
+
+  render() {
+    return (
+      <>
+        <div>Teacher Information {this.props.loginuser.username}</div>
+        <Table columns={this.columns} dataSource={this.props.students} />
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        {this.state.editFormVisible && (
+          <form>
+            <input
+              name="studentclass"
+              value={this.state.studentclass}
+              onChange={this.handleClassChange}
+              id="studentclass"
+            />
+            <input
+              name="ects"
+              value={this.state.ects}
+              type="number"
+              onChange={this.handleEctsChange}
+            />
+            <button onClick={this.handleEditStudent}>OK</button>
+          </form>
+        )}
+      </>
+    );
+  }
+}
+
+export default TeacherWelcome;
