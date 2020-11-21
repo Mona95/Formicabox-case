@@ -1,34 +1,16 @@
 import * as actionTypes from "../actions/actionTypes";
+import * as types from "../types/types";
 
-type Action = {
-  type: string;
-  payload: any;
+const initialState: types.AppState = {
+  students: [],
+  teachers: [],
+  loginuser: {},
 };
 
-interface Students {
-  username: string;
-  password: string;
-  class: string;
-  email: string;
-  ects: number;
-}
-
-interface Teachers {
-  username: string;
-  password: string;
-  title: string;
-  email: string;
-}
-
-interface State {
-  students: Students[];
-  teachers: Teachers[];
-  loginuser: object;
-}
-
-const initialState: State = { students: [], teachers: [], loginuser: {} };
-
-const rootReducer = (state = initialState, action: Action): State => {
+const rootReducer = (
+  state = initialState,
+  action: types.Action
+): types.AppState => {
   const {
     ADD_STUDENT,
     ADD_TEACHER,

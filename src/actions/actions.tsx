@@ -1,31 +1,17 @@
 import * as actionTypes from "./actionTypes";
+import * as types from "../types/types";
 
-type Student = {
-  username: string;
-  password: string;
-  studentclass: string;
-  email: string;
-  ects: number;
-};
-
-type Teacher = {
-  username: string;
-  password: string;
-  title: string;
-  email: string;
-};
-
-export const addStudent = (student: Student) => ({
+export const addStudent = (student: types.Student) => ({
   type: actionTypes.ADD_STUDENT,
   payload: student,
 });
 
-export const addTeacher = (teacher: Teacher) => ({
+export const addTeacher = (teacher: types.Teacher) => ({
   type: actionTypes.ADD_TEACHER,
   payload: teacher,
 });
 
-export const setLoginUser = (loginuser: Student | Teacher) => ({
+export const setLoginUser = (loginuser: types.Student | types.Teacher) => ({
   type: actionTypes.SET_LOGIN_USER,
   payload: loginuser,
 });

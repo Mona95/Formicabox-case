@@ -1,5 +1,6 @@
 import React, { FC, Component } from "react";
 import { Table } from "antd";
+import * as types from "../../types/types";
 
 type Props = {
   updateStudent: any;
@@ -8,18 +9,9 @@ type Props = {
   students: any;
 };
 
-type Student = {
-  username: string;
-  password: string;
-  studentclass: string;
-  email: string;
-  ects: number;
-  key: number;
-};
-
 type State = {
   editFormVisible: boolean;
-  selectedStudent: Student;
+  selectedStudent: types.Student;
   studentclass: string;
   ects: number;
 };
@@ -62,25 +54,28 @@ class TeacherWelcome extends Component<Props, State> {
       title: "Name",
       dataIndex: "username",
       key: "username",
-      sorter: (a: any, b: any) => a.username.length - b.username.length,
+      sorter: (a: types.Student, b: types.Student) =>
+        a.username.length - b.username.length,
     },
     {
       title: "Class",
       dataIndex: "studentclass",
       key: "studentclass",
-      sorter: (a: any, b: any) => a.studentclass.length - b.studentclass.length,
+      sorter: (a: types.Student, b: types.Student) =>
+        a.studentclass.length - b.studentclass.length,
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      sorter: (a: any, b: any) => a.email.length - b.email.length,
+      sorter: (a: types.Student, b: types.Student) =>
+        a.email.length - b.email.length,
     },
     {
       title: "ECTS",
       dataIndex: "ects",
       key: "ects",
-      sorter: (a: any, b: any) => a.ects - b.ects,
+      sorter: (a: types.Student, b: types.Student) => a.ects - b.ects,
     },
     {
       title: "Action",
@@ -114,7 +109,7 @@ class TeacherWelcome extends Component<Props, State> {
   };
 
   render() {
-    this.props.students.forEach((std: Student, index: number) => {
+    this.props.students.forEach((std: types.StudentWithKey, index: number) => {
       std.key = index;
     });
 

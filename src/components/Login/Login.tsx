@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FormInstance } from "antd/lib/form";
 import { connect } from "react-redux";
 import { setLoginUser } from "../../actions/actions";
+import * as types from "../../types/types";
 
 type Props = {
   setLoginUser: FC;
@@ -38,8 +39,8 @@ class Login extends Component<Props, State> {
       );
 
       if (loginUser) {
-        alert("user exists");
         this.props.setLoginUser(loginUser);
+        console.log(loginUser);
       } else {
         e.preventDefault();
         alert("User is not defined . please register first !");
@@ -80,17 +81,11 @@ class Login extends Component<Props, State> {
   }
 }
 
-type reduxState = {
-  students: any;
-  teachers: any;
-  loginuser: any;
-};
-
 const mapDispatchToProps = (dispatch: any) => ({
   setLoginUser: (loginuser: any) => dispatch(setLoginUser(loginuser)),
 });
 
-const mapStateToProps = (state: reduxState) => ({
+const mapStateToProps = (state: types.AppState) => ({
   students: state.students,
   teachers: state.teachers,
   loginuser: state.loginuser,

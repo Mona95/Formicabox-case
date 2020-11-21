@@ -1,8 +1,9 @@
 import React from "react";
+import * as types from "../../types/types";
 
 type Props = {
-  loginuser: any;
-  students: any;
+  loginuser: types.Student;
+  students: types.Student[];
 };
 
 const StudentWelcome: React.FC<Props> = (props: Props) => {
@@ -11,11 +12,13 @@ const StudentWelcome: React.FC<Props> = (props: Props) => {
 
   const displayRank = () => {
     let AllStudents = students.length,
-      sortStudents = students.sort((a: any, b: any) => b.ects - a.ects),
+      sortStudents = students.sort(
+        (a: types.Student, b: types.Student) => b.ects - a.ects
+      ),
       currStudentIndex;
 
     sortStudents.find(
-      (item: any, index: number) =>
+      (item: types.Student, index: number) =>
         item.ects === ects && (currStudentIndex = index + 1)
     );
 

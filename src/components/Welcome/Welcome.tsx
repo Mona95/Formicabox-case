@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import StudentWelcome from "./StudentWelcome";
 import TeacherWelcome from "./TeacherWelcome";
 import { removeStudent, updateStudent } from "../../actions/actions";
+import * as types from "../../types/types";
 
 interface Props {
   updateStudent: any;
@@ -43,12 +44,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     dispatch(updateStudent(studentname, studentclass, ects)),
 });
 
-type reduxState = {
-  loginuser: any;
-  students: any;
-};
-
-const mapStateToProps = (state: reduxState) => ({
+const mapStateToProps = (state: types.AppState) => ({
   loginuser: state.loginuser,
   students: state.students,
 });

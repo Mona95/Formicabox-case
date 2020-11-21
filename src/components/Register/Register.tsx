@@ -6,6 +6,7 @@ import { FormInstance } from "antd/lib/form";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { addStudent, addTeacher } from "../../actions/actions";
+import * as types from "../../types/types";
 
 type Props = {
   addStudent: FC;
@@ -72,39 +73,42 @@ class Register extends Component<Props, State> {
 
   render() {
     return (
-      <Form ref={this.registerFormRef} name="register-form">
-        <Radio.Group onChange={this.onChange} value={this.state.radioValue}>
-          <Radio value={"student"}>Student</Radio>
-          <Radio value={"teacher"}>Teacher</Radio>
-        </Radio.Group>
-        {this.state.radioValue === "student" ? (
-          <StudentRegister />
-        ) : (
-          <TeacherRegister />
-        )}
-        <Form.Item>
-          <Link to="/">
-            <Button onClick={this.onRegister} type="primary" htmlType="submit">
-              Register
-            </Button>
-          </Link>
-        </Form.Item>
-      </Form>
+      <>
+        <Form ref={this.registerFormRef} name="register-form">
+          <Radio.Group onChange={this.onChange} value={this.state.radioValue}>
+            <Radio value={"student"}>Student</Radio>
+            <Radio value={"teacher"}>Teacher</Radio>
+          </Radio.Group>
+          {this.state.radioValue === "student" ? (
+            <StudentRegister />
+          ) : (
+            <TeacherRegister />
+          )}
+          <Form.Item>
+            <Link to="/">
+              <Button
+                onClick={this.onRegister}
+                type="primary"
+                htmlType="submit"
+              >
+                Register
+              </Button>
+            </Link>
+          </Form.Item>
+        </Form>
+        <br />
+        <Link to="/">Back to Login</Link>
+      </>
     );
   }
 }
-
-type reduxState = {
-  students: any;
-  teachers: any;
-};
 
 const mapDispatchToProps = (dispatch: any) => ({
   addStudent: (student: any) => dispatch(addStudent(student)),
   addTeacher: (teacher: any) => dispatch(addTeacher(teacher)),
 });
 
-const mapStateToProps = (state: reduxState) => ({
+const mapStateToProps = (state: types.AppState) => ({
   students: state.students,
   teachers: state.teachers,
 });
