@@ -36,12 +36,33 @@ class Register extends Component<Props, State> {
       e.preventDefault();
       alert("Please Fill the blank fields");
     } else {
-      if (this.state.radioValue === "student") {
-        this.props.addStudent(values);
+      if (this.checkDuplicateData(values)) {
+        e.preventDefault();
+        alert("Username/password is alreaday taken.");
       } else {
-        this.props.addTeacher(values);
+        if (this.state.radioValue === "student") {
+          this.props.addStudent(values);
+        } else {
+          this.props.addTeacher(values);
+        }
       }
     }
+  };
+
+  checkDuplicateData = (values: any) => {
+    let { students, teachers } = this.props,
+      duplicatedStudent = students.find(
+        (student: any) =>
+          student.username === values.username ||
+          student.password === values.password
+      ),
+      duplicatedTeacher = teachers.find(
+        (teacher: any) =>
+          teacher.username === values.username ||
+          teacher.password === values.password
+      );
+
+    return duplicatedStudent || duplicatedTeacher;
   };
 
   onChange = (e: any) => {
