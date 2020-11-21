@@ -1,3 +1,4 @@
+import { act } from "react-dom/test-utils";
 import * as actionTypes from "./actionTypes";
 
 type Student = {

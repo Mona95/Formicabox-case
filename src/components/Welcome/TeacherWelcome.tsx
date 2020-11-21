@@ -2,14 +2,23 @@ import React, { FC, Component } from "react";
 import { Table } from "antd";
 
 type Props = {
+  updateStudent: any;
   removeStudent: FC;
   loginuser: any;
   students: any;
 };
 
+type Student = {
+  username: string;
+  password: string;
+  studentclass: string;
+  email: string;
+  ects: number;
+};
+
 type State = {
   editFormVisible: boolean;
-  selectedStudent: object;
+  selectedStudent: Student;
   studentclass: string;
   ects: number;
 };
@@ -17,7 +26,13 @@ type State = {
 class TeacherWelcome extends Component<Props, State> {
   state = {
     editFormVisible: false,
-    selectedStudent: {},
+    selectedStudent: {
+      username: "",
+      password: "",
+      studentclass: "",
+      email: "",
+      ects: 0,
+    },
     studentclass: "",
     ects: 0,
   };
@@ -88,9 +103,12 @@ class TeacherWelcome extends Component<Props, State> {
     this.setState({ ects: e.target.value });
   };
 
-  handleEditStudent = (value: any) => {
+  handleEditStudent = (e: any) => {
+    e.preventDefault();
     let { studentclass, ects, selectedStudent } = this.state;
-    debugger;
+    let name = selectedStudent.username;
+    this.props.updateStudent(name, studentclass, ects);
+    this.setState({ editFormVisible: false });
   };
 
   render() {
