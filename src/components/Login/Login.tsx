@@ -1,10 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, FC } from "react";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { FormInstance } from "antd/lib/form";
+import { connect } from "react-redux";
+import { setLoginUser } from "../../actions/actions";
 
-type Props = {};
+type Props = {
+  setLoginUser: FC;
+  students: any;
+  teachers: any;
+  loginuser: any;
+};
+
 type State = {};
 
 class Login extends Component<Props, State> {
@@ -21,6 +29,21 @@ class Login extends Component<Props, State> {
     if (isValid.length > 0) {
       e.preventDefault();
       alert("Please Fill the blank fields");
+    } else {
+      let { teachers, students } = this.props,
+        allUsers = [...teachers, ...students];
+      let loginUser = allUsers.find(
+        (user) =>
+          user.username === values.username && user.password === values.password
+      );
+
+      if (loginUser) {
+        alert("user exists");
+        this.props.setLoginUser(loginUser);
+      } else {
+        e.preventDefault();
+        alert("User is not defined . please register first !");
+      }
     }
   };
 
@@ -57,4 +80,20 @@ class Login extends Component<Props, State> {
   }
 }
 
-export default Login;
+type reduxState = {
+  students: any;
+  teachers: any;
+  loginuser: any;
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+  setLoginUser: (loginuser: any) => dispatch(setLoginUser(loginuser)),
+});
+
+const mapStateToProps = (state: reduxState) => ({
+  students: state.students,
+  teachers: state.teachers,
+  loginuser: state.loginuser,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

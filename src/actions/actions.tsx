@@ -25,6 +25,11 @@ export const addTeacher = (teacher: Teacher) => ({
   payload: teacher,
 });
 
+export const setLoginUser = (loginuser: Student | Teacher) => ({
+  type: actionTypes.SET_LOGIN_USER,
+  payload: loginuser,
+});
+
 export const removeStudent = (studentName: string) => ({
   type: actionTypes.REMOVE_STUDENT,
   payload: studentName,

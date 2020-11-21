@@ -47,8 +47,8 @@ class Register extends Component<Props, State> {
   };
 
   onChange = (e: any) => {
-    console.log("radio checked", e.target.value);
     this.setState({ radioValue: e.target.value });
+    this.registerFormRef.current?.resetFields();
   };
 
   render() {
