@@ -37,10 +37,8 @@ class Register extends Component<Props, State> {
       alert("Please Fill the blank fields");
     } else {
       if (this.state.radioValue === "student") {
-        debugger;
         this.props.addStudent(values);
       } else {
-        debugger;
         this.props.addTeacher(values);
       }
     }
