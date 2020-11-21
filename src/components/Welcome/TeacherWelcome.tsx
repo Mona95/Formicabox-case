@@ -14,6 +14,7 @@ type Student = {
   studentclass: string;
   email: string;
   ects: number;
+  key: number;
 };
 
 type State = {
@@ -32,6 +33,7 @@ class TeacherWelcome extends Component<Props, State> {
       studentclass: "",
       email: "",
       ects: 0,
+      key: 0,
     },
     studentclass: "",
     ects: 0,
@@ -112,6 +114,10 @@ class TeacherWelcome extends Component<Props, State> {
   };
 
   render() {
+    this.props.students.forEach((std: Student, index: number) => {
+      std.key = index;
+    });
+
     return (
       <>
         <div>Teacher Information {this.props.loginuser.username}</div>

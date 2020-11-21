@@ -18,7 +18,10 @@ class Welcome extends Component<Props, State> {
     return (
       <div>
         {this.props.loginuser.ects ? (
-          <StudentWelcome loginuser={this.props.loginuser} />
+          <StudentWelcome
+            students={this.props.students}
+            loginuser={this.props.loginuser}
+          />
         ) : (
           <TeacherWelcome
             updateStudent={this.props.updateStudent}

@@ -1,12 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 type Props = {
   loginuser: any;
+  students: any;
 };
 
 const StudentWelcome: React.FC<Props> = (props: Props) => {
   let { username, email, ects, studentclass } = props.loginuser;
+  let { students } = props;
+
+  const displayRank = () => {
+    let AllStudents = students.length,
+      sortStudents = students.sort((a: any, b: any) => b.ects - a.ects),
+      currStudentIndex;
+
+    sortStudents.find(
+      (item: any, index: number) =>
+        item.ects === ects && (currStudentIndex = index + 1)
+    );
+
+    return { currStudentIndex, AllStudents };
+  };
   return (
     <>
       <div>Student Information</div>
@@ -19,6 +33,10 @@ const StudentWelcome: React.FC<Props> = (props: Props) => {
       <br />
       <div>Student ECTS: {ects}</div>
       <br />
+      <div>
+        All Students {displayRank().AllStudents} / Your Rank{" "}
+        {displayRank().currStudentIndex}
+      </div>
     </>
   );
 };
